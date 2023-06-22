@@ -3,6 +3,25 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
+#include <stdbool.h>
+
+/**
+ * sort_flag - flag indicating if array is sorted
+ *
+ * @sorted: indicates true or false if array is sorted.
+ *
+ * Returns: True if sorted, false otherwise.
+ */
+
+typedef struct sort_flag
+{
+	bool sorted;
+} sort_flag_t;
+
+extern const sort_flag_t true_flag;
+extern const sort_flag_t false_flag;
+
 
 /**
  * struct listint_s - Doubly linked list node
