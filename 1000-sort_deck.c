@@ -8,12 +8,12 @@ void sort_deck(deck_node_t **deck);
 
 /**
  * _strcmp - Compares two strings.
- * @s1: The first string to be compared.
- * @s2: The second string to be compared.
+ * @str1: The first string to be compared.
+ * @str2: The second string to be compared.
  *
- * Return: Positive byte difference if s1 > s2
- *         0 if s1 == s2
- *         Negative byte difference if s1 < s2
+ * Return: Positive byte difference if str1 > str2
+ *         0 if str1 == str2
+ *         Negative byte difference if str1 < str2
  */
 int _strcmp(const char *str1, const char *str2)
 {
