@@ -1,8 +1,8 @@
 #include "sort.h"
 
 void swap_vals(int *a, int *b);
-int lomuto_partition(int *array, int low, int high);
-void quicksort(int *array, int low, int high);
+int lomuto_partition(int *array, size_t size, int low, int high);
+void quicksort_recursion(int *array, size_t size, int low, int high);
 void quick_sort(int *array, size_t size);
 
 void swap_vals(int *a, int *b)
@@ -22,35 +22,36 @@ void swap_vals(int *a, int *b)
  * Return: Pivot Index.
  */
 
-int lomuto_partition(int *array, int low, int high)
+int lomuto_partition(int *array, size_t size, int low, int high)
 {
 	int i, j, pivot;
 
-	i = low - 1;
+	i = low;
 	pivot = array[high];
 
 	for (j = low; j < high; j++)
 	{
-		if (array[j] < pivot)
+		if (array[j] <= pivot)
 		{
-			i++;
 			if (i != j)
 			{
 				swap_vals(&array[i], &array[j]);
-				print_array(array, high + 1);
+				print_array(array, size);
 			}
+			i++;
 		}
 	}
-	if (array[i + 1] != array[high])
+	if (array[i] != array[high])
 	{
-		swap_vals(&array[i + 1], &array[high]);
-		print_array(array, high + 1);
+		swap_vals(&array[i], &array[high]);
+		print_array(array, size);
 	}
-	return (i + 1);
+	return (i);
 }
 
+
 /**
- * quicksort - Sorts array in asc order using quicksort
+ * quicksort_recursion - Sorts array in asc order using quicksort
  *             while utilizing lomuto partition scheme.
  *
  * @array: Array to be sorted.
@@ -59,16 +60,16 @@ int lomuto_partition(int *array, int low, int high)
  *
  */
 
-void quicksort(int *array, int low, int high)
+void quicksort_recursion(int *array,  size_t size, int low, int high)
 {
 	int pivot_index;
 
 	if (low < high)
 	{
-		pivot_index = lomuto_partition(array, low, high);
+		pivot_index = lomuto_partition(array, size, low, high);
 
-		quicksort(array, low, pivot_index - 1);
-		quicksort(array, pivot_index + 1, high);
+		quicksort_recursion(array, size, low, pivot_index - 1);
+		quicksort_recursion(array, size, pivot_index + 1, high);
 	}
 }
 
@@ -84,5 +85,5 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	quicksort(array, 0, size - 1);
+	quicksort_recursion(array, size, 0, size - 1);
 }
